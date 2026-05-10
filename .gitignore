@@ -3,3 +3,10 @@
 node_modules/
 .next/
 prisma/migrations/
+.DS_Store
+.claude/
+EQ marketing/
+Marca personal CPP/
+Ventas/
+Poder esencial/
+Scheduled/
