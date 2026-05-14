@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Montserrat:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-heading: 'Barlow Condensed', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+
+  /* Brand */
+  --color-brand-blue: #0057FF;
+  --color-brand-violet: #A200FF;
+  --color-brand-green: #2ECC71;
+  --color-brand-cream: #F4E7D5;
+
+  /* Semantic */
+  --primary: #0057FF;
+  --primary-hover: #0044CC;
+  --primary-muted: #E8F0FF;
+  --secondary: #A200FF;
+  --secondary-hover: #8400CC;
+  --accent: #2ECC71;
+  --accent-warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* Surfaces */
+  --bg: #F8F9FA;
+  --surface: #FFFFFF;
+  --surface-alt: #F4E7D5;
+
+  /* Borders */
+  --border: #E2E8F0;
+  --border-strong: #CBD5E1;
+
+  /* Text */
+  --text-primary: #1E293B;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-text-primary font-body;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+}

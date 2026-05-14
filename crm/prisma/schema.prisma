@@ -1,0 +1,163 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── NextAuth v5 required models ───────────────────────────────────────────
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─── CRM models ─────────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(seller)
+  createdAt     DateTime  @default(now())
+
+  accounts            Account[]
+  sessions            Session[]
+  ownedOpportunities  Opportunity[]  @relation("OpportunityOwner")
+  interactions        Interaction[]
+}
+
+model Company {
+  id            String        @id @default(cuid())
+  name          String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  opportunities Opportunity[]
+}
+
+model Opportunity {
+  id                  String          @id @default(cuid())
+  title               String
+  companyId           String
+  ownerId             String
+  stage               Stage           @default(lead)
+  leadSource          LeadSource?
+  proposalUrl         String?
+  dealAmount          Decimal?        @db.Decimal(12, 2)
+  lostReason          LostReason?
+  lastInteractionAt   DateTime        @default(now())
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  company      Company       @relation(fields: [companyId], references: [id])
+  owner        User          @relation("OpportunityOwner", fields: [ownerId], references: [id])
+  qualification Qualification?
+  interactions Interaction[]
+}
+
+model Qualification {
+  id                  String      @id @default(cuid())
+  opportunityId       String      @unique
+  hasBudget           Boolean?
+  hasRealPain         Boolean?
+  decisionMaker       String?
+  hasUrgency          Boolean?
+  qualificationNotes  String?     @db.Text
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  // is_complete is computed in application logic (all 4 fields not null)
+}
+
+model Interaction {
+  id               String          @id @default(cuid())
+  opportunityId    String
+  authorId         String
+  type             InteractionType
+  note             String?         @db.Text
+  interactionDate  DateTime        @default(now()) @db.Date
+  createdAt        DateTime        @default(now())
+
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  author      User        @relation(fields: [authorId], references: [id])
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum Role {
+  seller
+  director
+}
+
+enum Stage {
+  lead
+  qualification
+  meeting
+  sent
+  negotiation
+  won
+  lost
+}
+
+enum LeadSource {
+  linkedin_organic
+  lead_magnet
+  referral
+  webinar
+  cold_outreach
+  other
+}
+
+enum LostReason {
+  price
+  timing
+  competition
+  other
+}
+
+enum InteractionType {
+  qualification_call
+  diagnosis_meeting
+  follow_up_call
+  email
+  note
+  proposal_sent
+  negotiation
+  deal
+}
