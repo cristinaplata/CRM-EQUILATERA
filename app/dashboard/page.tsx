@@ -19,7 +19,7 @@ interface DashboardData {
 export default function DashboardPage() {
   const { data: session } = useSession()
   const [data, setData] = useState<DashboardData | null>(null)
-  const [staleOpps, setStaleOpps] = useState<unknown[]>([])
+  const [staleOpps, setStaleOpps] = useState<any[]>([])
   const [users, setUsers] = useState<Pick<User, "id" | "name" | "email">[]>([])
   const [filterOwnerId, setFilterOwnerId] = useState<string | undefined>(undefined)
   const [loading, setLoading] = useState(true)
