@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = "force-dynamic"
+
 import { useState, useEffect } from "react"
 import { User, Stage } from "@prisma/client"
 import { KanbanBoard } from "@/components/kanban/KanbanBoard"
