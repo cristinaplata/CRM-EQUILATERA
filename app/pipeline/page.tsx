@@ -23,13 +23,12 @@ export default function PipelinePage() {
 
   useEffect(() => {
     Promise.all([
-      fetch("/api/opportunities").then((r) => r.json()),
-      fetch("/api/users").then((r) => r.json()),
-      fetch("/api/dashboard/funnel").then((r) => r.json()),
+      fetch("/api/opportunities").then((r) => r.json()).catch(() => []),
+      fetch("/api/users").then((r) => r.json()).catch(() => []),
+      fetch("/api/dashboard/funnel").then((r) => r.json()).catch(() => ({})),
     ]).then(([opps, usrs, funnel]) => {
-      setOpportunities(opps)
-      setUsers(usrs)
-      // Map funnel data to stage counts for progress bars
+      setOpportunities(Array.isArray(opps) ? opps : [])
+      setUsers(Array.isArray(usrs) ? usrs : [])
       setWeeklyCounts({
         lead: funnel.funnel?.leads?.current ?? 0,
         qualification: funnel.funnel?.qualified?.current ?? 0,

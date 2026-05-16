@@ -29,13 +29,13 @@ export default function DashboardPage() {
     if (filterOwnerId) params.set("owner_id", filterOwnerId)
 
     Promise.all([
-      fetch(`/api/dashboard?${params}`).then((r) => r.json()),
-      fetch("/api/opportunities/stale").then((r) => r.json()),
-      fetch("/api/users").then((r) => r.json()),
+      fetch(`/api/dashboard?${params}`).then((r) => r.json()).catch(() => null),
+      fetch("/api/opportunities/stale").then((r) => r.json()).catch(() => []),
+      fetch("/api/users").then((r) => r.json()).catch(() => []),
     ]).then(([d, stale, usrs]) => {
       setData(d)
-      setStaleOpps(stale)
-      setUsers(usrs)
+      setStaleOpps(Array.isArray(stale) ? stale : [])
+      setUsers(Array.isArray(usrs) ? usrs : [])
       setLoading(false)
     })
   }, [filterOwnerId])

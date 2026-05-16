@@ -37,7 +37,8 @@ export default function CompaniesPage() {
   useEffect(() => {
     fetch("/api/companies")
       .then((r) => r.json())
-      .then((data) => { setCompanies(data); setLoading(false) })
+      .then((data) => { setCompanies(Array.isArray(data) ? data : []); setLoading(false) })
+      .catch(() => setLoading(false))
   }, [])
 
   const filtered = companies
