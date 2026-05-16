@@ -5,10 +5,9 @@ const prisma = new PrismaClient()
 async function main() {
   // Seed users — run once at go-live
   const users = [
-    { name: "Socia 1", email: "socia1@equilatera.com.co", role: Role.seller },
-    { name: "Socia 2", email: "socia2@equilatera.com.co", role: Role.seller },
-    { name: "Socia 3", email: "socia3@equilatera.com.co", role: Role.seller },
-    { name: "Directora", email: "directora@equilatera.com.co", role: Role.director },
+    { name: "Diana Soto", email: "diana@equilatera.com.co", role: Role.seller },
+    { name: "Monica Cortes", email: "monica@equilatera.com.co", role: Role.seller },
+    { name: "Cristina Plata", email: "cristina@equilatera.com.co", role: Role.director },
   ]
 
   for (const u of users) {
