@@ -46,7 +46,8 @@ export function FunnelMetricsWidget({ ownerId }: Props) {
     if (ownerId) params.set("owner_id", ownerId)
     fetch(`/api/dashboard/funnel?${params}`)
       .then((r) => r.json())
-      .then(setData)
+      .then((d) => { if (d?.funnel) setData(d) })
+      .catch(() => null)
   }, [weekOffset, ownerId])
 
   return (
