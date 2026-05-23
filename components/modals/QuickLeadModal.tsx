@@ -36,11 +36,12 @@ export function QuickLeadModal({ open, onClose, onCreated, currentUserId, users 
   useEffect(() => {
     if (open) {
       setCompanyName("")
-      setOwnerId(currentUserId)
+      const validId = users.find((u) => u.id === currentUserId)?.id ?? users[0]?.id ?? ""
+      setOwnerId(validId)
       setLeadSource("")
       companyRef.current?.focus()
     }
-  }, [open, currentUserId])
+  }, [open, currentUserId, users])
 
   useEffect(() => {
     if (!companyName.trim()) { setCompanies([]); return }
