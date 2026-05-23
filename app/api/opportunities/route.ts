@@ -48,7 +48,8 @@ export async function POST(req: NextRequest) {
   const parsed = createSchema.safeParse(body)
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
 
-  const { companyId, companyName, ownerId, leadSource } = parsed.data
+  const { companyId, companyName, leadSource } = parsed.data
+  const ownerId = parsed.data.ownerId || session.user.id!
 
   let resolvedCompanyId = companyId
   if (!resolvedCompanyId && companyName) {
