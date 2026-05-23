@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Columns, Building2, BarChart2, LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
@@ -23,15 +24,15 @@ export function Sidebar({ userName }: SidebarProps) {
     <aside className="w-[240px] shrink-0 bg-surface border-r border-border flex flex-col h-screen sticky top-0">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-border">
-        <div className="flex items-center gap-3">
-          <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
-            <polygon points="24,4 44,40 4,40" fill="none" stroke="#0057FF" strokeWidth="3" />
-            <polygon points="24,14 38,38 10,38" fill="none" stroke="#A200FF" strokeWidth="2" />
-            <polygon points="24,24 33,38 15,38" fill="#2ECC71" opacity="0.5" />
-          </svg>
-          <span className="font-heading font-bold text-[18px] text-text-primary">EQUILATERA</span>
-        </div>
-        <p className="text-caption text-text-muted mt-1 pl-9">CRM Comercial</p>
+        <Image
+          src="/logo-equilatera.png"
+          alt="EQUILATERA"
+          width={160}
+          height={60}
+          className="object-contain"
+          priority
+        />
+        <p className="text-caption text-text-muted mt-1">CRM Comercial</p>
       </div>
 
       {/* Nav */}

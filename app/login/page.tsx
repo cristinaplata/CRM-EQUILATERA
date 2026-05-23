@@ -1,21 +1,20 @@
+import Image from "next/image"
 import { signIn } from "@/lib/auth"
-import { redirect } from "next/navigation"
 
 export default function LoginPage() {
   return (
     <div className="min-h-screen bg-bg flex items-center justify-center p-4">
       <div className="bg-surface rounded-lg shadow-modal p-8 w-full max-w-sm border border-border">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-            <polygon points="24,4 44,40 4,40" fill="none" stroke="#0057FF" strokeWidth="3" />
-            <polygon points="24,14 38,38 10,38" fill="none" stroke="#A200FF" strokeWidth="2" />
-            <polygon points="24,24 33,38 15,38" fill="#2ECC71" opacity="0.5" />
-          </svg>
-          <div>
-            <p className="font-heading font-bold text-[20px] text-text-primary leading-none">EQUILATERA</p>
-            <p className="text-caption text-text-muted">CRM Comercial</p>
-          </div>
+        <div className="flex justify-center mb-8">
+          <Image
+            src="/logo-equilatera.png"
+            alt="EQUILATERA"
+            width={180}
+            height={80}
+            className="object-contain"
+            priority
+          />
         </div>
 
         <h1 className="font-heading text-h2 text-text-primary text-center mb-2">Iniciar sesión</h1>
