@@ -123,8 +123,7 @@ async function main() {
         ...(row.obs && {
           interactions: {
             create: {
-              type: "note",
-              notes: row.obs,
+              note: row.obs,
               author: { connect: { id: owner.id } },
             }
           }
