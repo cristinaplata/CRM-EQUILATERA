@@ -3,13 +3,14 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Columns, Building2, BarChart2, LogOut } from "lucide-react"
+import { Columns, Building2, BarChart2, LogOut, Scale } from "lucide-react"
 import { signOut } from "next-auth/react"
 import { cn } from "@/lib/utils"
 
 const links = [
   { href: "/pipeline", label: "Pipeline", icon: Columns },
   { href: "/companies", label: "Empresas", icon: Building2 },
+  { href: "/licitaciones", label: "Licitaciones", icon: Scale },
   { href: "/dashboard", label: "Dashboard", icon: BarChart2 },
 ]
 

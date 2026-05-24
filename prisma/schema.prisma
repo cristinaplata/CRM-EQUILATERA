@@ -59,6 +59,7 @@ model User {
   sessions            Session[]
   ownedOpportunities  Opportunity[]  @relation("OpportunityOwner")
   interactions        Interaction[]
+  licitaciones        Licitacion[]
 }
 
 model Company {
@@ -118,6 +119,28 @@ model Interaction {
   author      User        @relation(fields: [authorId], references: [id])
 }
 
+model Licitacion {
+  id            String          @id @default(cuid())
+  tema          String
+  organizacion  String?
+  fechaApertura DateTime?
+  fechaCierre   DateTime?
+  duracion      String?
+  eqSola        Boolean?
+  aliados       String?         @db.Text
+  tienePrecio   Boolean?
+  precio        String?
+  factible      Boolean?
+  link          String?         @db.Text
+  comentarios   String?         @db.Text
+  feedback      String?         @db.Text
+  stage         LicitacionStage @default(evaluating)
+  ownerId       String
+  owner         User            @relation(fields: [ownerId], references: [id])
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
 // ─── Enums ───────────────────────────────────────────────────────────────────
 
 enum Role {
@@ -160,4 +183,12 @@ enum InteractionType {
   proposal_sent
   negotiation
   deal
+}
+
+enum LicitacionStage {
+  evaluating
+  preparing
+  sent
+  won
+  lost
 }
