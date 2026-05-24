@@ -125,7 +125,7 @@ async function main() {
             create: {
               type: "note",
               notes: row.obs,
-              userId: owner.id,
+              author: { connect: { id: owner.id } },
             }
           }
         })
