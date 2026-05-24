@@ -332,7 +332,7 @@ export default function LicitacionesPage() {
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
             </div>
           ) : (
-            <div className="grid grid-cols-5 gap-4 min-h-[60vh]">
+            <div className="grid gap-4 min-h-[60vh] overflow-x-auto" style={{ gridTemplateColumns: "repeat(6, minmax(180px, 1fr))" }}>
               {STAGES.map(({ key, label, color, bg }) => {
                 const cards = byStage(key)
                 return (
