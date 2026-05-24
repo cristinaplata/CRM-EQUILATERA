@@ -191,4 +191,5 @@ enum LicitacionStage {
   sent
   won
   lost
+  not_submitted
 }

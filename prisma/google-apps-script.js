@@ -34,8 +34,8 @@ const DEFAULT_OWNER = "cristina@equilatera.com.co"
 
 // ── SHEET → STAGE MAPPING ────────────────────────────────────────────────────
 const SHEET_STAGE = {
-  "Licitaciones presentadas":   null,   // derived from "enviada" / "aprobada" columns
-  "revisadas y No presentadas": "evaluating",
+  "Licitaciones presentadas":   null,             // derived from "enviada" / "aprobada" columns
+  "revisadas y No presentadas": "not_submitted",  // reviewed but decided not to present
   "licitaciones No ganadas":    "lost",
   "Licitaciones SI ganadas":    "won",
   "Estudios de mercado":        "sent",

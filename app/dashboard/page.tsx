@@ -26,19 +26,21 @@ interface LicitacionSummary {
 }
 
 const LIC_STAGE_LABELS: Record<LicitacionStage, string> = {
-  evaluating: "Evaluando",
-  preparing: "Preparando",
-  sent: "Enviada",
-  won: "Ganada",
-  lost: "Perdida",
+  evaluating:    "Evaluando",
+  preparing:     "Preparando",
+  sent:          "Enviada",
+  won:           "Ganada",
+  lost:          "Perdida",
+  not_submitted: "No presentada",
 }
 
 const LIC_STAGE_COLORS: Record<LicitacionStage, string> = {
-  evaluating: "#3B82F6",
-  preparing: "#EAB308",
-  sent: "#8B5CF6",
-  won: "#22C55E",
-  lost: "#EF4444",
+  evaluating:    "#3B82F6",
+  preparing:     "#EAB308",
+  sent:          "#8B5CF6",
+  won:           "#22C55E",
+  lost:          "#EF4444",
+  not_submitted: "#9CA3AF",
 }
 
 export default function DashboardPage() {
@@ -76,7 +78,7 @@ export default function DashboardPage() {
           total: lics.length,
           won,
           lost,
-          active: lics.length - won - lost,
+          active: lics.length - won - lost - (counts.not_submitted ?? 0),
           conversionRate: decided > 0 ? Math.round((won / decided) * 100) : 0,
           byStageCounts: counts,
         })
@@ -185,7 +187,7 @@ export default function DashboardPage() {
                   {licSummary.total > 0 && (
                     <div>
                       <div className="flex h-3 rounded-full overflow-hidden mb-2">
-                        {(["evaluating","preparing","sent","won","lost"] as LicitacionStage[]).map((s) => {
+                        {(["evaluating","preparing","sent","won","lost","not_submitted"] as LicitacionStage[]).map((s) => {
                           const pct = ((licSummary.byStageCounts[s] ?? 0) / licSummary.total) * 100
                           if (pct === 0) return null
                           return (
@@ -198,7 +200,7 @@ export default function DashboardPage() {
                         })}
                       </div>
                       <div className="flex flex-wrap gap-x-4 gap-y-1">
-                        {(["evaluating","preparing","sent","won","lost"] as LicitacionStage[]).map((s) => {
+                        {(["evaluating","preparing","sent","won","lost","not_submitted"] as LicitacionStage[]).map((s) => {
                           const n = licSummary.byStageCounts[s] ?? 0
                           if (n === 0) return null
                           return (

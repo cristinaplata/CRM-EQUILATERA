@@ -131,7 +131,7 @@ const DATA: Row[] = [
     factible: true,
     link: "https://eulacsocialaccelerator.cainco.org.bo/publico/convocatoria?codigo_referencia=1/2026",
     comentarios: "Va con Corpra Mujer, ajustando la propuesta técnica que presentamos a ONU Mujeres",
-    stage: "evaluating",
+    stage: "not_submitted",
   },
   {
     tema: "Proyecto LIBRES – rutas de atención y duplas territoriales (7 municipios Cauca y Valle)",
@@ -145,7 +145,7 @@ const DATA: Row[] = [
     precio: "900 millones sin IVA",
     factible: true,
     link: "https://drive.google.com/drive/folders/16dN9OpdGL9IGLYB_8YlTFhZ6buL6Z6by",
-    stage: "evaluating",
+    stage: "not_submitted",
   },
 
   // ══════════════════════════════════════════════════════════════════════════

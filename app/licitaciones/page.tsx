@@ -30,11 +30,12 @@ type Licitacion = {
 }
 
 const STAGES: { key: LicitacionStage; label: string; color: string; bg: string }[] = [
-  { key: "evaluating", label: "Evaluando", color: "text-blue-600", bg: "bg-blue-50 border-blue-200" },
-  { key: "preparing",  label: "Preparando", color: "text-yellow-600", bg: "bg-yellow-50 border-yellow-200" },
-  { key: "sent",       label: "Enviada", color: "text-purple-600", bg: "bg-purple-50 border-purple-200" },
-  { key: "won",        label: "Ganada", color: "text-green-600", bg: "bg-green-50 border-green-200" },
-  { key: "lost",       label: "Perdida", color: "text-red-600", bg: "bg-red-50 border-red-200" },
+  { key: "evaluating",    label: "Evaluando",      color: "text-blue-600",   bg: "bg-blue-50 border-blue-200" },
+  { key: "preparing",     label: "Preparando",     color: "text-yellow-600", bg: "bg-yellow-50 border-yellow-200" },
+  { key: "sent",          label: "Enviada",         color: "text-purple-600", bg: "bg-purple-50 border-purple-200" },
+  { key: "won",           label: "Ganada",          color: "text-green-600",  bg: "bg-green-50 border-green-200" },
+  { key: "lost",          label: "Perdida",         color: "text-red-600",    bg: "bg-red-50 border-red-200" },
+  { key: "not_submitted", label: "No presentada",   color: "text-gray-500",   bg: "bg-gray-50 border-gray-200" },
 ]
 
 function formatDate(d: string | null) {
