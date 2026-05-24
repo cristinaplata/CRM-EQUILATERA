@@ -2,16 +2,18 @@
 
 import { cn } from "@/lib/utils"
 import { ButtonHTMLAttributes, forwardRef } from "react"
+import React from "react"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "danger"
   size?: "sm" | "md" | "lg"
   fullWidth?: boolean
   loading?: boolean
+  icon?: React.ReactNode
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", size = "md", fullWidth, loading, className, children, disabled, ...props }, ref) => {
+  ({ variant = "primary", size = "md", fullWidth, loading, icon, className, children, disabled, ...props }, ref) => {
     return (
       <button
         ref={ref}
@@ -34,7 +36,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading ? (
           <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-        ) : null}
+        ) : icon ?? null}
         {children}
       </button>
     )
